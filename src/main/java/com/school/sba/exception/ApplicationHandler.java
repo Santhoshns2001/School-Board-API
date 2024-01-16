@@ -1,10 +1,8 @@
-package com.school.sba.utility;
-
+package com.school.sba.exception;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -17,18 +15,16 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import com.school.sba.exception.AdminDuplicateException;
-
 
 
 @RestControllerAdvice
-public class ApplicationHandler extends ResponseEntityExceptionHandler{
+public class ApplicationHandler extends ResponseEntityExceptionHandler {
 	
-	private ResponseEntity<Object> structure(HttpStatus status, String message, Object rootCause) {
+	private ResponseEntity<Object> structure (HttpStatus status,String message,Object rootCause){
 		return new ResponseEntity<Object> (Map.of(
 				"status",status.value(),
 				"message",message,
-				"rootCause",rootCause),status);
+				"rootCause",rootCause),status);		
 	}
 	
 	
@@ -40,19 +36,22 @@ public class ApplicationHandler extends ResponseEntityExceptionHandler{
 		Map<String, String> errors=new HashMap<String,String>();
 		allErrors.forEach(error ->{
 			FieldError fieldError=(FieldError)error;
-			errors.put(fieldError.getField(),fieldError.getDefaultMessage());
+			errors.put(fieldError.getField(), fieldError.getDefaultMessage());	
 		});
-		return structure (HttpStatus.BAD_REQUEST,"failed to save the data",errors);
+		return structure(HttpStatus.BAD_REQUEST,"failed to save the data",errors);
 	}
 	
-	@ExceptionHandler
-	public ResponseEntity<Object> handlerUserNotFoundById(AdminDuplicateException ex) {
-		return structure (HttpStatus.FOUND,ex.getMessage(),"only one admin is allowed");
+	@ExceptionHandler(AdminDuplicateException.class)
+	public ResponseEntity<Object> handlerUserNotFoundByID(AdminDuplicateException ex){
+		return structure(HttpStatus.BAD_REQUEST,ex.getMessage(),"Only one admin is allowed");
 	}
+	
 
 	
 	
 	
-	 
+	
+	
+	
 
-} 
+}

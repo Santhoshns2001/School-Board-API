@@ -1,4 +1,4 @@
-package com.school.sba.Service;
+package com.school.sba.service;
 
 import java.util.List;
 import java.util.Optional;
@@ -8,9 +8,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.school.sba.Entity.School;
-import com.school.sba.Repositary.SchoolRepository;
+import com.school.sba.entity.School;
 import com.school.sba.exception.SchoolNotFoundByIdException;
+import com.school.sba.repositary.SchoolRepository;
 import com.school.sba.utility.ResponseStructure;
 
 

@@ -1,4 +1,4 @@
-package com.school.sba.Controller;
+package com.school.sba.controller;
 
 
 import java.util.List;
@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.school.sba.Entity.School;
-import com.school.sba.Service.SchoolService;
+import com.school.sba.entity.School;
+import com.school.sba.service.SchoolService;
 import com.school.sba.utility.ResponseStructure;
 
 

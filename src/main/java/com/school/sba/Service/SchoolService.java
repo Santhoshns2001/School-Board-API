@@ -1,9 +1,10 @@
-package com.school.sba.Service;
+package com.school.sba.service;
 
 
 import java.util.List;
 import org.springframework.http.ResponseEntity;
-import com.school.sba.Entity.School;
+
+import com.school.sba.entity.School;
 import com.school.sba.utility.ResponseStructure;
 
 public interface SchoolService {

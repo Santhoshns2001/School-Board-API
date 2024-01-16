@@ -1,4 +1,4 @@
-package com.school.sba.Entity;
+package com.school.sba.entity;
 
 import org.springframework.stereotype.Component;
 
@@ -14,8 +14,8 @@ public class School {
 	private  int schoolId;
 	private String schoolName;
 	private String schoolAddress;
-	private String schoolEmail;
-	private long schoolPhno;
+	private String emailId;
+	private long contactNo;
 	
 	
 

@@ -1,6 +1,6 @@
 package com.school.sba.utility;
 
-public class ResponseStructure<T> {
+public class ResponseStructure <T> {
 	private int status;
 	private String message;
 	private T data;
