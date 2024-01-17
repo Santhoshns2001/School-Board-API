@@ -7,6 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -31,6 +32,12 @@ public class User {
 	@Column(unique = true)
 	private String useremail;
 	private UserRole userRole;
+	private boolean isDeleted;
+	
+	@ManyToOne
+	private School school;
+	
+	
 	
 	
 	

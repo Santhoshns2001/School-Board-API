@@ -8,17 +8,31 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.school.sba.Enum.UserRole;
+import com.school.sba.dto.SchoolRequest;
+import com.school.sba.dto.SchoolResponse;
+import com.school.sba.dto.UserResponce;
 import com.school.sba.entity.School;
+import com.school.sba.exception.AdminDuplicateException;
+import com.school.sba.exception.AdminNotFoundException;
 import com.school.sba.exception.SchoolNotFoundByIdException;
+import com.school.sba.exception.UserNotFoundByIdException;
 import com.school.sba.repositary.SchoolRepository;
+import com.school.sba.repositary.UserRepoistary;
 import com.school.sba.utility.ResponseStructure;
 
 
 @Service
 public class SchoolServiceImpl implements SchoolService{
+
 	@Autowired
 	private SchoolRepository schoolRepository;
-	
+
+	@Autowired
+	private UserRepoistary userRepo;
+
+
+
 	@Override
 	public ResponseEntity<ResponseStructure<School>> addSchool(School school) {
 		School sch = schoolRepository.save(school);
@@ -29,8 +43,8 @@ public class SchoolServiceImpl implements SchoolService{
 		responseStructure.setData(sch);
 
 		return new ResponseEntity<ResponseStructure<School>>(responseStructure,HttpStatus.CREATED);	
-		}
-	
+	}
+
 	@Override
 	public ResponseEntity<ResponseStructure<School>> findSchool(int schoolId) {
 		Optional<School> optional = schoolRepository.findById(schoolId);
@@ -104,6 +118,43 @@ public class SchoolServiceImpl implements SchoolService{
 
 		}
 	}
-	
-	
+
+	@Override
+	public ResponseEntity<ResponseStructure<SchoolResponse>> adminCreateSchool(int userId, SchoolRequest schoolRequest) {
+		return userRepo.findById(userId).map( u  -> {
+			if(u.getUserRole().equals(UserRole.ADMIN)) {
+				if(u.getSchool()==null) {
+					School school=mapToSchool(schoolRequest);
+					school = schoolRepository.save(school);
+					userRepo.save(u);
+					ResponseStructure<SchoolResponse> responseStructure=new ResponseStructure<SchoolResponse>();
+					responseStructure.setStatus(HttpStatus.CREATED.value());
+					responseStructure.setMessage("school saved succussfully");
+					responseStructure.setData(mapToSchoolResponse(school));
+					return new ResponseEntity<ResponseStructure<SchoolResponse>>(responseStructure,HttpStatus.CREATED);
+				}else
+					throw new AdminDuplicateException("only one school can be created per admin");
+			}else throw new AdminNotFoundException("only admin can create school");
+		}).orElseThrow(() ->new UserNotFoundByIdException("failed to save school"));
+	}
+
+	private SchoolResponse mapToSchoolResponse(School school) {
+		return SchoolResponse.builder()
+				.schoolId(school.getSchoolId())
+				.schoolName(school.getSchoolName())
+				.schoolAddress(school.getSchoolAddress())
+				.emailId(school.getEmailId())
+				.contactNo(school.getContactNo())
+				.build();
+	}
+
+	private School mapToSchool(SchoolRequest schoolRequest) {
+		return School.builder()
+				.schoolName(schoolRequest.getSchoolName())
+				.schoolAddress(schoolRequest.getSchoolAddress())
+				.contactNo(schoolRequest.getContactNo())
+				.emailId(schoolRequest.getEmailId()).build();
+	}
+
+
 }

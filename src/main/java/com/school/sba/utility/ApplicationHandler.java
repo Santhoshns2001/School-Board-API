@@ -17,7 +17,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import com.school.sba.exception.AdminDuplicateException;
+import com.school.sba.exception.AdminNotFoundException;
+import com.school.sba.exception.UserNotFoundByIdException;
 
 
 
@@ -46,8 +47,13 @@ public class ApplicationHandler extends ResponseEntityExceptionHandler{
 	}
 	
 	@ExceptionHandler
-	public ResponseEntity<Object> handlerUserNotFoundById(AdminDuplicateException ex) {
+	public ResponseEntity<Object> handlerAdminNotFoundById(AdminNotFoundException ex) {
 		return structure (HttpStatus.FOUND,ex.getMessage(),"only one admin is allowed");
+	}
+	
+	@ExceptionHandler
+	public ResponseEntity<Object> handlerUserNotFoundById(UserNotFoundByIdException ex) {
+		return structure (HttpStatus.NOT_FOUND,ex.getMessage(),"user not found by the id provided");
 	}
 
 	
