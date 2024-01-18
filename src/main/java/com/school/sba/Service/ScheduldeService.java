@@ -8,7 +8,12 @@ import com.school.sba.utility.ResponseStructure;
 
 public interface ScheduldeService {
 
-	ResponseEntity<ResponseStructure<ScheduldeResponse>> adminAddSchedulde(int schoolId,
+	ResponseEntity<ResponseStructure<ScheduldeResponse>> adminCreatesSchedulde(int schoolId,
 			ScheduldeRequest scheduldeRequest);
+
+	ResponseEntity<ResponseStructure<ScheduldeResponse>> findScheduleBySchoolId(int schoolId);
+
+	ResponseEntity<ResponseStructure<ScheduldeResponse>> updateScheduleById(int scheduleldId,
+			ScheduldeRequest scheduleldRequest);
 
 }

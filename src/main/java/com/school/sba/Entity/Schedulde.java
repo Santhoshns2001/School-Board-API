@@ -9,6 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -18,6 +19,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 
 public class Schedulde {
 	@Id
@@ -32,7 +34,7 @@ public class Schedulde {
 	private LocalTime launchTime;
 	private Duration lunchLengthInMin;
 	
-//	@OneToOne(mappedBy = "scheduldeId")
-//	private School school;
+	@OneToOne(mappedBy = "scheduldeId")
+	private School school;
 
 }

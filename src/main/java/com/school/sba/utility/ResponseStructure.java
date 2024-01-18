@@ -1,5 +1,8 @@
 package com.school.sba.utility;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class ResponseStructure <T> {
 	private int status;
 	private String message;

@@ -1,15 +1,17 @@
 package com.school.sba.entity;
 
+import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.stereotype.Component;
+import com.school.sba.Enum.ProgramType;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -18,29 +20,24 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@Entity
-@Component
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class School {
+@Builder
+@Entity
+public class AcademicProgram {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private  int schoolId;
-	private String schoolName;
-	private long contactNo;
-	private String emailId;
-	private String schoolAddress;
+	private int programId;
+	private ProgramType programType;
+	private String programName;
+	private LocalTime beginsAt;
+	private LocalTime endsAt;
 	
-	@OneToOne
-	private Schedulde scheduldeId;
+	@ManyToOne
+	private School school;
 	
-	@OneToMany(mappedBy = "school")
-	private List<AcademicProgram> academicProgram;
-	
-	
-	
-	
+	@ManyToMany
+	List<Subject> subjects;
 	
 	
 
