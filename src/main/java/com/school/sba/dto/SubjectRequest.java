@@ -2,7 +2,7 @@ package com.school.sba.dto;
 
 import java.util.List;
 
-import com.school.sba.entity.Subject;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,6 +18,6 @@ import lombok.Setter;
 
 public class SubjectRequest {
 	
-	private List<Subject> subjects;
+	private List<String> subjectNames;
 
 }

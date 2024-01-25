@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -47,9 +48,12 @@ public class SchoolController{
 	public ResponseEntity<ResponseStructure<List<School>>> findAll() {
 		return schoolService.findAll();
 	}
-	@PostMapping("/users/{userId}/schools")
-	public ResponseEntity<ResponseStructure<SchoolResponse>> adminCreateSchool (@PathVariable int userId,@RequestBody SchoolRequest school){
-		return schoolService.adminCreateSchool(userId,school);
+	
+	
+	@PreAuthorize("hasAuthority('ADMIN')")
+	@PostMapping("/users/schools")
+	public ResponseEntity<ResponseStructure<SchoolResponse>> adminCreateSchool (@RequestBody SchoolRequest school){
+		return schoolService.adminCreateSchool(school);
 	}
 	
 	

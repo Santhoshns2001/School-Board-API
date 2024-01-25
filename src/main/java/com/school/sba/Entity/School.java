@@ -35,7 +35,7 @@ public class School {
 	@OneToOne
 	private Schedulde scheduldeId;
 	
-	@OneToMany(mappedBy = "school")
+	@OneToMany
 	private List<AcademicProgram> academicProgram;
 	
 	

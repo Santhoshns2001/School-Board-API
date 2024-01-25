@@ -25,7 +25,7 @@ public class UserRequest {
 	
 	@Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$", message = "Password must"
 			+ " contain at least one letter, one number, one special character")
-	private String userPassword;
+	private String password;
 	
 	@Pattern(regexp = "^[A-Z][a-zA-Z ]*$",message = "must be upper camel case and numbers are not allowed")
 	private String userFirstName;

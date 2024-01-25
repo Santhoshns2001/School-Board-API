@@ -21,7 +21,7 @@ public class ApplicationDocumentation {
 	Info info() {
 		return new Info().title("School Board - Intermediate level School Schedule Management Application")
 				.version("1.0v")
-				.description(" defining the school board schedulde using backend and mysql ");
+				.description(" defining the school board schedulde using springboot  and spring security ");
 	}
 	
 	@Bean

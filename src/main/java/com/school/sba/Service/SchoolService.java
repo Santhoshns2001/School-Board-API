@@ -19,6 +19,6 @@ public interface SchoolService {
 	
 	
 	
-	public ResponseEntity<ResponseStructure<SchoolResponse>> adminCreateSchool(int userId, SchoolRequest school);
+	public ResponseEntity<ResponseStructure<SchoolResponse>> adminCreateSchool( SchoolRequest school);
 	
 }

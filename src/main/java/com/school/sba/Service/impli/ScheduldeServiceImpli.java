@@ -1,4 +1,4 @@
-package com.school.sba.service;
+package com.school.sba.service.impli;
 
 import java.time.Duration;
 
@@ -13,6 +13,7 @@ import com.school.sba.entity.Schedulde;
 import com.school.sba.entity.School;
 import com.school.sba.repositary.ScheduldeRepo;
 import com.school.sba.repositary.SchoolRepository;
+import com.school.sba.service.ScheduldeService;
 import com.school.sba.utility.ResponseStructure;
 @Service
 public class ScheduldeServiceImpli implements ScheduldeService{

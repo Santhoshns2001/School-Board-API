@@ -14,6 +14,6 @@ import lombok.Setter;
 public class SubjectResponse {
 	
 	private int subjectId;
-	private String subjectName;
+	private String subjectNames;
 
 }

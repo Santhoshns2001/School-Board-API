@@ -1,4 +1,4 @@
-package com.school.sba.service;
+package com.school.sba.service.impli;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,7 +52,7 @@ public class AcademicProgramServiceImple implements AcademicProgramService{
 			return new ResponseEntity<ResponseStructure<List<AcademicProgramResponse>>>(responseStructure, HttpStatus.CREATED);
 		}).orElseThrow(()->new IllegalArgumentException("School Does Not Exist!!!"));
 	}
-	private AcademicProgramResponse mapToResponse(AcademicProgram academicProgram) {
+	public static AcademicProgramResponse mapToResponse(AcademicProgram academicProgram) {
 		return AcademicProgramResponse.builder()
 				.programId(academicProgram.getProgramId())
 				.beginsAt(academicProgram.getBeginsAt())
@@ -61,7 +61,7 @@ public class AcademicProgramServiceImple implements AcademicProgramService{
 				.programType(academicProgram.getProgramType())
 				.build();
 	}
-	private AcademicProgram mapToAcademicProgram(School school, AcademicProgramRequest academicProgramRequest) {
+	public AcademicProgram mapToAcademicProgram(School school, AcademicProgramRequest academicProgramRequest) {
 		return AcademicProgram.builder()
 				.beginsAt(academicProgramRequest.getBeginsAt())
 				.endsAt(academicProgramRequest.getEndsAt())
